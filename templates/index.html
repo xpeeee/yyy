@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoGrab - Easy Video Downloads</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i data-lucide="video" class="w-6 h-6 text-blue-600"></i>
+                <span class="font-bold text-xl">VideoGrab</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#features" class="text-gray-600 hover:text-gray-900">Features</a>
+                <a href="#how-it-works" class="text-gray-600 hover:text-gray-900">How It Works</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-gray-900">Testimonials</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-white overflow-hidden flex flex-col items-center justify-center min-h-screen">
+        <div class="text-center w-full">
+            <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+                Download Videos <span class="text-blue-600">Instantly</span>
+            </h1>
+            <p class="mt-2 text-base text-gray-500 sm:text-lg md:text-xl">
+                Download videos from your favorite platforms in multiple formats and qualities.
+            </p>
+        </div>
+    
+        <div class="bg-white p-4 w-full max-w-md rounded-lg shadow-lg flex flex-col items-center">
+            <h2 class="text-2xl font-bold text-center mb-3">Video Downloader</h2>
+    
+            <input type="text" id="videoUrl" class="w-full p-2 border rounded-lg" placeholder="Enter video URL">
+            <button onclick="fetchDownloadLinks()" class="w-full bg-blue-600 text-white py-2 mt-3 rounded-lg hover:bg-blue-700">
+                Get Download Link
+            </button>
+    
+            <div id="loading" class="hidden text-center py-4 text-blue-600">Fetching video, please wait...</div>
+    
+            <video id="videoPlayer" class="hidden w-full mt-4 rounded-lg" controls></video>
+            <div id="downloadOptions" class="mt-4 w-full"></div>
+        </div>
+    </section>
+    
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Amazing Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-200">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-md bg-blue-100 mb-4">
+                        <i data-lucide="zap" class="w-6 h-6 text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fast Downloads</h3>
+                    <p class="text-gray-600">Get your videos instantly with our optimized download system.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-200">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-md bg-blue-100 mb-4">
+                        <i data-lucide="file-video" class="w-6 h-6 text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Multiple Formats</h3>
+                    <p class="text-gray-600">Choose from various quality options and formats.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-200">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-md bg-blue-100 mb-4">
+                        <i data-lucide="shield" class="w-6 h-6 text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Secure Downloads</h3>
+                    <p class="text-gray-600">Your downloads are safe and private with our secure system.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">How It Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mx-auto mb-4">
+                        <span class="text-blue-600 font-bold">1</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Paste URL</h3>
+                    <p class="text-gray-600">Copy and paste your video URL in the input field</p>
+                </div>
+                <div class="text-center">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mx-auto mb-4">
+                        <span class="text-blue-600 font-bold">2</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Choose Quality</h3>
+                    <p class="text-gray-600">Select your preferred video quality and format</p>
+                </div>
+                <div class="text-center">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mx-auto mb-4">
+                        <span class="text-blue-600 font-bold">3</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Download</h3>
+                    <p class="text-gray-600">Click download and get your video instantly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">What Our Users Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="user" class="w-6 h-6 text-blue-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Sarah Johnson</h4>
+                            <p class="text-gray-500">Content Creator</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"This tool has made downloading videos so much easier. I use it daily for my content creation!"</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="user" class="w-6 h-6 text-blue-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Mike Chen</h4>
+                            <p class="text-gray-500">Digital Artist</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Fast, reliable, and easy to use. Exactly what I needed for my video projects!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i data-lucide="video" class="w-6 h-6 text-blue-400"></i>
+                        <span class="font-bold text-xl">VideoGrab</span>
+                    </div>
+                    <p class="text-gray-400">The fastest and most reliable video downloader available online.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white">How It Works</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center">
+                <p class="text-gray-400">&copy; 2025 VideoGrab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+   
+
+
+
+
+    <script>
+        function fetchDownloadLinks() {
+            let videoUrl = document.getElementById('videoUrl').value;
+            let videoPlayer = document.getElementById('videoPlayer');
+            let downloadOptions = document.getElementById('downloadOptions');
+            let loadingIndicator = document.getElementById('loading');
+
+            if (!videoUrl) {
+                alert("Please enter a video URL.");
+                return;
+            }
+
+            // Show loading indicator
+            loadingIndicator.classList.remove('hidden');
+
+            fetch('/get_video_links', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ video_url: videoUrl })
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadingIndicator.classList.add('hidden'); // Hide loading
+
+                if (data.error) {
+                    alert("Error: " + data.error);
+                    return;
+                }
+
+                let videoData = data.video_links[0];
+
+                if (videoData) {
+                    videoPlayer.src = videoData.url;
+                    videoPlayer.classList.remove('hidden');
+                    videoPlayer.controls = true;
+                    videoPlayer.load();
+
+                    downloadOptions.innerHTML = `
+                        <a href="${videoData.url}" download class="block bg-blue-600 text-white py-2 px-4 rounded-lg text-center hover:bg-blue-700">
+                            Download Video
+                        </a>
+                    `;
+                } else {
+                    alert("No downloadable video found.");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching video links:", error);
+                alert("Failed to fetch video download links.");
+            });
+        }
+    </script>
+
+
+</body>
+</html>
