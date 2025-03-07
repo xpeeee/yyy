@@ -8,4 +8,4 @@ ujson==5.10.0
 yt-dlp==2025.1.26
 requests==2.31.0
 Werkzeug==2.3.7
-phantomjs-binary==2.1.1
+phantomjs-binary
