@@ -2,22 +2,29 @@ from flask import Flask, render_template, request, jsonify
 import yt_dlp
 import threading
 import ujson as json  # Ultra-fast JSON processing
+import logging
 
 app = Flask(__name__)
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 
 # Function to fetch video links in a separate thread
 def fetch_video_links(video_url, result_dict):
     ydl_opts = {
         'quiet': True,
         'noplaylist': True,
-        'format': 'best[ext=mp4]',  # Fetch only the best MP4 format
-        'cookiefile': 'cookies.txt'  # Use extracted cookies
+        'format': 'bestvideo+bestaudio/best',  # Fetch best available format
+        'merge_output_format': 'mp4',  # Ensure MP4 format
+        'cookiefile': 'cookies.txt',  # Use extracted cookies if available
     }
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(video_url, download=False)
             result_dict["url"] = info.get("url")
+            result_dict["formats"] = info.get("formats", [])  # Fetch all formats
     except Exception as e:
+        logging.error(f"Error fetching video: {e}")
         result_dict["error"] = str(e)
 
 @app.route('/')
@@ -40,7 +47,12 @@ def get_video_links():
     thread.join()  # Wait for the thread to complete
 
     if "url" in result_dict:
-        return json.dumps({"video_links": [{"quality": "Best Available", "url": result_dict["url"]}]}), 200
+        return json.dumps({
+            "video_links": [
+                {"quality": f"{fmt['format_note']} ({fmt['ext']})", "url": fmt["url"]}
+                for fmt in result_dict.get("formats", []) if "url" in fmt
+            ]
+        }), 200
     else:
         return json.dumps({"error": result_dict.get("error", "Failed to fetch video.")}), 500
 
