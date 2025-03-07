@@ -43,5 +43,5 @@ def get_video_links():
     else:
         return json.dumps({"error": "Failed to fetch video."}), 500
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True, port=5001)
