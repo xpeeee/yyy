@@ -11,6 +11,7 @@ def fetch_video_links(video_url, result_dict):
         'quiet': True,
         'noplaylist': True,
         'format': 'best[ext=mp4]',  # Fetch only the best MP4 format
+        'cookiefile': 'cookies.txt'  # Use extracted cookies
     }
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -41,7 +42,7 @@ def get_video_links():
     if "url" in result_dict:
         return json.dumps({"video_links": [{"quality": "Best Available", "url": result_dict["url"]}]}), 200
     else:
-        return json.dumps({"error": "Failed to fetch video."}), 500
+        return json.dumps({"error": result_dict.get("error", "Failed to fetch video.")}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
